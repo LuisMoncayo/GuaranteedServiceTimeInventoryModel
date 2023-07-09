@@ -1,0 +1,59 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 43 rows, 51 columns and 93 nonzeros
+Model fingerprint: 0x7ecc34b3
+Model has 13 general constraints
+Variable types: 26 continuous, 25 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [5e+04, 6e+05]
+  Bounds range     [3e+01, 6e+01]
+  RHS range        [5e+00, 3e+01]
+
+User MIP start produced solution with objective 5.54743e+06 (0.00s)
+Loaded user MIP start with objective 5.54743e+06
+
+Presolve added 21 rows and 2314 columns
+Presolve time: 0.00s
+Presolved: 64 rows, 2365 columns, 7007 nonzeros
+Presolved model has 13 SOS constraint(s)
+Found heuristic solution: objective 5547415.5666
+Variable types: 2328 continuous, 37 integer (0 binary)
+
+Root relaxation: objective 4.132109e+06, 64 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 4132109.01    0    4 5547415.57 4132109.01  25.5%     -    0s
+     0     0 4737923.76    0    4 5547415.57 4737923.76  14.6%     -    0s
+     0     2 4737923.76    0    4 5547415.57 4737923.76  14.6%     -    0s
+H   32    18                    5405926.0059 4737923.76  12.4%   3.1    0s
+
+Explored 463 nodes (981 simplex iterations) in 0.45 seconds (0.31 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 3: 5.40593e+06 5.54742e+06 5.54743e+06 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (1.4193e-05) exceeds tolerance
+Warning: max general constraint violation (1.4193e-05) exceeds tolerance
+Best objective 5.405926005921e+06, best bound 5.405926005921e+06, gap 0.0000%
+
+User-callback calls 1270, time in user-callback 0.00 sec
+ ----------------------------------------
+Time to run:, 0.4557340145111084 ,seconds
+The value of the objective using Gurobi is, 5405926.01 
+Manuf_0001 , 0 , 30 , -0.0
+Trans_0001 , -0.0 , 15 , 1.0
+Trans_0002 , -0.0 , 15 , 1.0
+Trans_0003 , -0.0 , 15 , 1.0
+Trans_0004 , 0.0 , 15 , 1.0
+Manuf_0002 , 1.0 , 14 , 15.0
+Retail_0001 , 15.0 , 5 , 20.0
+Manuf_0003 , 1.0 , 14 , 15.0
+Retail_0002 , 15.0 , 5 , 20.0
+Manuf_0004 , 1.0 , 14 , 15.0
+Retail_0003 , 15.0 , 5 , 20.0
+Manuf_0005 , 1.0 , 14 , 15.0
+Retail_0004 , 15.0 , 5 , 20.0

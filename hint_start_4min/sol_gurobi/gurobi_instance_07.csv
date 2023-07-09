@@ -1,0 +1,88 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 160 rows, 139 columns and 326 nonzeros
+Model fingerprint: 0xe8deb504
+Model has 38 general constraints
+Variable types: 76 continuous, 63 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [9e+02, 8e+04]
+  Bounds range     [4e+00, 8e+01]
+  RHS range        [4e+00, 4e+01]
+
+User MIP start did not produce a new incumbent solution
+User MIP start violates constraint a1Part_0006 by 0.460000000
+
+Presolve added 0 rows and 3951 columns
+Presolve removed 73 rows and 0 columns
+Presolve time: 0.03s
+Presolved: 87 rows, 4090 columns, 12171 nonzeros
+Presolved model has 18 SOS constraint(s)
+Variable types: 4048 continuous, 42 integer (0 binary)
+
+Root relaxation: objective 2.159329e+06, 79 iterations, 0.00 seconds (0.00 work units)
+Another try with MIP start
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+H    0     0                    2641712.2590 2163122.33  18.1%     -    0s
+     0     0 2163122.33    0    8 2641712.26 2163122.33  18.1%     -    0s
+H    0     0                    2324806.4162 2163122.33  6.95%     -    0s
+     0     0 2239491.85    0    8 2324806.42 2239491.85  3.67%     -    0s
+     0     2 2239491.85    0    8 2324806.42 2239491.85  3.67%     -    0s
+
+Explored 7245 nodes (12864 simplex iterations) in 1.72 seconds (1.76 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 2: 2.32481e+06 2.64171e+06 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (7.0030e-03) exceeds tolerance
+Warning: max general constraint violation (7.0030e-03) exceeds tolerance
+  Piecewise linearization of function constraints often causes big violation.
+  Try to adjust the settings of the related parameters, such as FuncPieces.
+Best objective 2.324806416177e+06, best bound 2.324770546015e+06, gap 0.0015%
+
+User-callback calls 15070, time in user-callback 0.03 sec
+ ----------------------------------------
+Time to run:, 1.731454849243164 ,seconds
+The value of the objective using Gurobi is, 2324806.42 
+Manuf_0001 , 25.0 , 28.0 , 53.0
+Retail_0001 , 53.0 , 6.0 , 10.0
+Manuf_0002 , 25.0 , 34.0 , 59.0
+Retail_0002 , 59.0 , 4.0 , 10.0
+Manuf_0003 , 25.0 , 34.0 , 59.0
+Retail_0003 , 59.0 , 6.0 , 10.0
+Manuf_0004 , 25.0 , 35.0 , 60.0
+Retail_0004 , 60.0 , 5.0 , 10.0
+Manuf_0005 , 25.0 , 34.0 , 59.0
+Retail_0005 , 59.0 , 5.0 , 10.0
+Manuf_0006 , 25.0 , 35.0 , 60.0
+Retail_0006 , 60.0 , 7.0 , 10.0
+Part_0001 , 0 , 7.0 , 7.0
+Trans_0001 , 7.0 , 12.0 , 19.0
+Part_0002 , 0 , 10.35 , 10.0
+Trans_0002 , 10.0 , 8.0 , 18.0
+Part_0003 , 0 , 10.19 , 10.0
+Trans_0003 , 10.0 , 7.0 , 17.0
+Part_0004 , 0 , 9.31 , 9.0
+Trans_0004 , 9.0 , 7.0 , 16.0
+Part_0005 , 0 , 25.0 , 16.0
+Trans_0005 , 16.0 , 9.0 , 25.0
+Part_0006 , 0 , 8.54 , 8.0
+Trans_0006 , 8.0 , 9.0 , 17.0
+Part_0007 , 0 , 10.0 , 10.0
+Trans_0007 , 10.0 , 8.0 , 18.0
+Part_0008 , 0 , 33.0 , 33.0
+Trans_0008 , 33.0 , 6.66 , 25.0
+Part_0009 , 0 , 6.0 , 6.0
+Trans_0009 , 6.0 , 8.9 , 14.0
+Part_0010 , 0 , 9.0 , -0.0
+Trans_0010 , -0.0 , 34.0 , 25.0
+Part_0011 , 0 , 7.0 , 7.0
+Trans_0011 , 7.0 , 7.74 , 14.0
+Part_0012 , 0 , 4.0 , 4.0
+Trans_0012 , 4.0 , 8.71 , 12.0
+Part_0013 , 0 , 7.0 , 7.0
+Trans_0013 , 7.0 , 7.32 , 14.0

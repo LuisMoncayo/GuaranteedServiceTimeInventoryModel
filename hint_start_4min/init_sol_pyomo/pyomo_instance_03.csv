@@ -1,0 +1,26 @@
+Optimality test +++++++++++++++++++++++++++++
+The following constraints are not satisfied: 
++++++++++++++++++++++++++++
+Time to run:, 0.21971917152404785 ,seconds
+------
+The SC has, 17 , nodes and,  18 edges.
+------
+The value of the objective using Pyomo is, 3204006.03 
+stage, SI, time, S
+Manuf_0001 , -0.0 , 12.0 , 0.0
+Trans_0001 , -0.0 , 2.0 , 1.99
+Manuf_0002 , -0.0 , 10.0 , 0.0
+Trans_0004 , -0.0 , 2.0 , 1.99
+Manuf_0003 , 1.99 , 10.0 , -0.0
+Dist_0002 , -0.0 , 1.2 , 0.0
+Manuf_0004 , 1.99 , 10.0 , -0.0
+Dist_0003 , -0.0 , 4.3 , 0.0
+Dist_0004 , -0.0 , 4.2 , 0.0
+Part_0001 , 0.0 , 45.0 , 0.0
+Part_0002 , 0.0 , 37.5 , -0.0
+Part_0003 , 0.0 , 53.5 , -0.0
+Part_0004 , 0.0 , 26.0 , 0.0
+Part_0005 , 0.0 , 31.0 , 0.0
+Trans_0002 , -0.0 , 2.0 , 1.99
+Trans_0003 , -0.0 , 2.0 , 1.99
+Dist_0001 , 1.99 , 1.0 , 0.0

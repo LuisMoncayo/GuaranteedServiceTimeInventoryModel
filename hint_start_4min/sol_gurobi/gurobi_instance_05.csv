@@ -1,0 +1,75 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 93 rows, 95 columns and 179 nonzeros
+Model fingerprint: 0x6b66db99
+Model has 27 general constraints
+Variable types: 54 continuous, 41 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [3e+02, 5e+04]
+  Bounds range     [1e+01, 5e+01]
+  RHS range        [1e+00, 4e+01]
+
+User MIP start produced solution with objective 755794 (0.00s)
+Loaded user MIP start with objective 755794
+
+Presolve added 25 rows and 3712 columns
+Presolve time: 0.01s
+Presolved: 118 rows, 3807 columns, 11303 nonzeros
+Presolved model has 27 SOS constraint(s)
+Variable types: 3768 continuous, 39 integer (0 binary)
+
+Root relaxation: objective 5.946298e+05, 99 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 602560.901    0   11 755794.053 602560.901  20.3%     -    0s
+     0     0 628774.087    0   11 755794.053 628774.087  16.8%     -    0s
+     0     2 628774.087    0   11 755794.053 628774.087  16.8%     -    0s
+* 1623   557              82    728073.52746 644849.482  11.4%   2.1    0s
+H 1761   514                    717020.36234 648956.952  9.49%   2.1    0s
+
+Explored 7480 nodes (14339 simplex iterations) in 1.26 seconds (1.48 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 3: 717020 728074 755794 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (3.9443e-02) exceeds tolerance
+Warning: max general constraint violation (3.9443e-02) exceeds tolerance
+  Piecewise linearization of function constraints often causes big violation.
+  Try to adjust the settings of the related parameters, such as FuncPieces.
+Best objective 7.170203623377e+05, best bound 7.170203623377e+05, gap 0.0000%
+
+User-callback calls 15448, time in user-callback 0.03 sec
+ ----------------------------------------
+Time to run:, 1.2633869647979736 ,seconds
+The value of the objective using Gurobi is, 717020.36 
+Dist_0001 , 1.0 , 1.0 , -0.0
+Manuf_0002 , 0.0 , 2.05 , 2.0000000001723928
+Manuf_0003 , 0.0 , 2.05 , -0.0
+Manuf_0004 , 0.0 , 2.05 , 2.0000000001765423
+Manuf_0005 , 0.0 , 2.05 , 2.0
+Manuf_0001 , 0.0 , 1.0 , 1.0
+Retail_0001 , 2.0000000001723928 , 5.1 , 2.0
+Retail_0002 , 2.0000000001723928 , 3.0 , 2.0
+Retail_0003 , 0.0 , 2.0 , 2.0
+Retail_0004 , 0.0 , 3.0 , 2.0
+Retail_0005 , 2.0000000001765423 , 5.1 , 2.0
+Retail_0006 , 2.0000000001765423 , 5.1 , 2.0
+Retail_0007 , 2.0 , 4.1 , 2.0
+Retail_0008 , 2.0 , 3.0 , 2.0
+Part_0001 , 0 , 38.0 , 0.0
+Part_0002 , 0 , 34.55 , 0.0
+Part_0003 , 0 , 14.0 , 0.0
+Part_0004 , 0 , 33.75 , 0.0
+Part_0005 , 0 , 33.75 , 0.0
+Part_0006 , 0 , 12.0 , 0.0
+Part_0007 , 0 , 11.75 , 0.0
+Part_0008 , 0 , 35.0 , -0.0
+Part_0009 , 0 , 10.0 , 0.0
+Part_0010 , 0 , 36.0 , 0.0
+Part_0011 , 0 , 10.0 , 0.0
+Part_0012 , 0 , 40.2 , 0.0
+Part_0013 , 0 , 10.0 , 0.0

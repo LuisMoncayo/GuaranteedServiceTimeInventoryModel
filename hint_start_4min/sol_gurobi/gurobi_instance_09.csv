@@ -1,0 +1,98 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 176 rows, 180 columns and 343 nonzeros
+Model fingerprint: 0x515fa020
+Model has 49 general constraints
+Variable types: 98 continuous, 82 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+01, 3e+04]
+  Bounds range     [2e+01, 5e+01]
+  RHS range        [1e+00, 4e+01]
+
+User MIP start produced solution with objective 515825 (0.00s)
+Loaded user MIP start with objective 515825
+
+Presolve added 30 rows and 5909 columns
+Presolve time: 0.01s
+Presolved: 206 rows, 6089 columns, 18056 nonzeros
+Presolved model has 49 SOS constraint(s)
+Variable types: 6026 continuous, 63 integer (0 binary)
+
+Root relaxation: objective 4.427019e+05, 135 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 442750.016    0    6 515824.980 442750.016  14.2%     -    0s
+     0     0 471611.255    0    6 515824.980 471611.255  8.57%     -    0s
+     0     2 471611.255    0    6 515824.980 471611.255  8.57%     -    0s
+* 3991   548             122    515166.97081 514051.889  0.22%   1.9    1s
+H 4051   536                    514820.07806 514051.889  0.15%   1.9    1s
+H 4063   536                    514628.58594 514051.889  0.11%   1.9    1s
+H 4561   472                    514609.43796 514276.415  0.06%   1.8    1s
+* 5512     0              94    514609.43787 514609.437  0.00%   1.6    1s
+
+Explored 5516 nodes (9184 simplex iterations) in 1.35 seconds (1.57 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 5: 514609 514629 514820 ... 515825
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (4.8968e-04) exceeds tolerance
+Warning: max general constraint violation (4.8968e-04) exceeds tolerance
+Best objective 5.146094378684e+05, best bound 5.146094378684e+05, gap 0.0000%
+
+User-callback calls 11510, time in user-callback 0.02 sec
+ ----------------------------------------
+Time to run:, 1.3594329357147217 ,seconds
+The value of the objective using Gurobi is, 514609.44 
+Manuf_0001 , 26.999999553080478 , 2.0 , 28.999999553080478
+Trans_0002 , 28.999999553080478 , 2.0 , 2.0
+Manuf_0002 , 2.0 , 1.0 , -0.0
+Dist_0001 , 0.0 , 3.0 , 2.0
+Dist_0002 , 0.0 , 3.0 , 2.0
+Dist_0003 , 0.0 , 4.29 , 2.0
+Dist_0004 , 0.0 , 4.31 , 2.0
+Manuf_0003 , 2.0 , 2.0 , 0.0
+Dist_0005 , 0.0 , 3.0 , 2.0
+Dist_0006 , 0.0 , 4.0 , 2.0
+Dist_0007 , -0.0 , 5.88 , 2.0
+Dist_0008 , 0.0 , 2.0 , 2.0
+Dist_0009 , -0.0 , 4.59 , 2.0
+Dist_0010 , 0.0 , 3.0 , 2.0
+Dist_0011 , -0.0 , 5.16 , 2.0
+Dist_0012 , 0.0 , 2.0 , 2.0
+Dist_0013 , -0.0 , 4.0 , 2.0
+Dist_0014 , 0.0 , 3.0 , 2.0
+Dist_0015 , -0.0 , 3.0 , 2.0
+Manuf_0004 , 2.0 , 1.0 , 0.0
+Dist_0016 , 0.0 , 3.57 , 2.0
+Dist_0017 , 0.0 , 2.0 , 2.0
+Dist_0018 , 0.0 , 4.0 , 2.0
+Dist_0019 , 0.0 , 2.0 , 2.0
+Dist_0020 , 0.0 , 4.54 , 2.0
+Dist_0021 , 0.0 , 4.51 , 2.0
+Dist_0022 , 0.0 , 3.0 , 2.0
+Dist_0023 , 0.0 , 3.0 , 2.0
+Dist_0024 , -0.0 , 3.0 , 2.0
+Dist_0025 , 0.0 , 2.0 , 2.0
+Dist_0026 , -0.0 , 4.0 , 2.0
+Part_0001 , 0 , 27.0 , 26.999999553080478
+Part_0002 , 0 , 26.0 , 26.0
+Part_0003 , 0 , 26.0 , 26.0
+Part_0004 , 0 , 23.0 , 23.0
+Part_0005 , 0 , 25.0 , 25.0
+Part_0006 , 0 , 24.0 , 24.0
+Part_0007 , 0 , 37.5 , 0.0
+Trans_0001 , 0.0 , 2.0 , 2.0
+Part_0008 , 0 , 37.5 , 0.0
+Trans_0003 , 0.0 , 2.0 , 2.0
+Part_0009 , 0 , 26.33 , 2.0
+Part_0010 , 0 , 22.0 , 2.0
+Part_0011 , 0 , 28.0 , 2.0
+Part_0012 , 0 , 24.0 , 2.0
+Part_0013 , 0 , 18.0 , 2.0
+Part_0014 , 0 , 19.0 , 2.0
+Part_0015 , 0 , 21.0 , 2.0
+Part_0016 , 0 , 24.0 , 2.0
