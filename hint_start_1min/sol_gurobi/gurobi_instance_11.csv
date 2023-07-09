@@ -1,0 +1,138 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 262 rows, 259 columns and 548 nonzeros
+Model fingerprint: 0x9837f46a
+Model has 68 general constraints
+Variable types: 136 continuous, 123 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+03, 1e+05]
+  Bounds range     [1e+00, 6e+01]
+  RHS range        [1e+00, 2e+01]
+
+User MIP start did not produce a new incumbent solution
+User MIP start violates constraint a1Trans_0001 by 9.000000000
+
+Presolve added 8 rows and 7575 columns
+Presolve time: 0.03s
+Presolved: 270 rows, 7834 columns, 23230 nonzeros
+Presolved model has 56 SOS constraint(s)
+Variable types: 7715 continuous, 119 integer (0 binary)
+
+Root relaxation: objective 3.634862e+06, 197 iterations, 0.00 seconds (0.00 work units)
+Another try with MIP start
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+H    0     0                    4809265.7588 3642883.43  24.3%     -    0s
+     0     0 3642883.43    0   28 4809265.76 3642883.43  24.3%     -    0s
+H    0     0                    4655920.4219 3642883.43  21.8%     -    0s
+     0     0 3662664.70    0   28 4655920.42 3662664.70  21.3%     -    0s
+     0     2 3662664.70    0   28 4655920.42 3662664.70  21.3%     -    0s
+H13266  8719                    4655920.4104 3914732.06  15.9%   3.1    3s
+H13274  8719                    4655920.3402 3914732.06  15.9%   3.1    3s
+ 21962 15847 4557085.93   44  179 4655920.34 3953817.72  15.1%   3.1    5s
+ 33578 23087 4391609.62   31  490 4655920.34 4063502.99  12.7%   3.2   10s
+ 46586 28534 4361033.65   35  369 4655920.34 4253816.08  8.64%   6.6   15s
+ 66978 37946 4614174.12   45  340 4655920.34 4302409.72  7.59%   9.1   20s
+ 89962 43325 4552912.77   40  383 4655920.34 4332815.04  6.94%  10.8   25s
+ 111288 53592     cutoff   50      4655920.34 4350891.01  6.55%  11.8   30s
+ 133288 67547 4635559.76   41  374 4655920.34 4363730.88  6.28%  12.6   35s
+ 154793 80418 4484048.36   39  394 4655920.34 4373992.31  6.06%  13.2   40s
+ 171562 90585     cutoff   38      4655920.34 4379996.26  5.93%  13.6   45s
+ 192052 103213 4552752.29   51  318 4655920.34 4387073.71  5.77%  14.0   50s
+ 213898 115735 4533947.26   39  395 4655920.34 4393915.23  5.63%  14.3   55s
+ 231427 126222 4495519.89   42  347 4655920.34 4398225.36  5.53%  14.5   60s
+
+Cutting planes:
+  Gomory: 171
+  Projected implied bound: 5
+  MIR: 128
+  Flow cover: 86
+  Relax-and-lift: 1
+
+Explored 233822 nodes (3405050 simplex iterations) in 60.37 seconds (113.16 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 3: 4.65592e+06 4.65592e+06 4.80927e+06 
+
+Solve interrupted
+Warning: max constraint violation (2.3556e-03) exceeds tolerance
+Warning: max general constraint violation (2.3556e-03) exceeds tolerance
+  Piecewise linearization of function constraints often causes big violation.
+  Try to adjust the settings of the related parameters, such as FuncPieces.
+Best objective 4.655920340163e+06, best bound 4.398851433871e+06, gap 5.5213%
+
+User-callback calls 473321, time in user-callback 0.70 sec
+ ----------------------------------------
+Time to run:, 60.37616014480591 ,seconds
+The value of the objective using Gurobi is, 4655920.34 
+Manuf_0001 , 14.0 , 19.75 , 6.0
+Trans_0014 , 6.0 , 2.0 , 8.0
+Trans_0015 , 6.0 , 2.0 , 8.0
+Trans_0016 , 6.0 , 2.0 , 8.0
+Manuf_0002 , 14.0 , 18.0 , 4.0
+Trans_0017 , 4.0 , 3.0 , 7.0
+Trans_0018 , 4.0 , 2.0 , 6.0
+Trans_0019 , 4.0 , 2.0 , 6.0
+Manuf_0003 , 14.0 , 24.0 , 38.0
+Trans_0020 , 38.0 , 2.0 , 40.0
+Trans_0021 , 38.0 , 2.0 , 40.0
+Trans_0022 , 38.0 , 3.0 , 41.0
+Manuf_0004 , 14.0 , 20.25 , 7.0
+Trans_0023 , 7.0 , 3.0 , 10.0
+Trans_0024 , 7.0 , 3.0 , 10.0
+Trans_0025 , 7.0 , 3.0 , 10.0
+Manuf_0005 , 14.0 , 19.75 , 6.0
+Trans_0026 , 6.0 , 3.0 , 9.0
+Trans_0027 , 6.0 , 3.0 , 9.0
+Trans_0028 , 6.0 , 4.0 , 10.0
+Manuf_0006 , 14.0 , 19.75 , 6.0
+Trans_0029 , 6.0 , 3.0 , 9.0
+Trans_0030 , 6.0 , 3.0 , 9.0
+Trans_0031 , 6.0 , 3.0 , 9.0
+Part_0001 , 0 , 6.0 , 5.0
+Trans_0001 , 5.0 , 9.0 , 14.0
+Part_0002 , 0 , 8.0 , 8.0
+Trans_0002 , 8.0 , 6.0 , 14.0
+Part_0003 , 0 , 9.0 , 6.0
+Trans_0003 , 6.0 , 8.0 , 14.0
+Part_0004 , 0 , 7.0 , 7.0
+Trans_0004 , 7.0 , 6.0 , 13.0
+Part_0005 , 0 , 16.0 , 5.0
+Trans_0005 , 5.0 , 9.0 , 14.0
+Part_0006 , 0 , 7.0 , 6.0
+Trans_0006 , 6.0 , 8.0 , 14.0
+Part_0007 , 0 , 8.0 , 7.0
+Trans_0007 , 7.0 , 7.0 , 14.0
+Part_0008 , 0 , 22.0 , 9.0
+Trans_0008 , 9.0 , 5.0 , 14.0
+Part_0009 , 0 , 3.0 , 3.0
+Trans_0009 , 3.0 , 6.0 , 9.0
+Part_0010 , 0 , 7.0 , -0.0
+Trans_0010 , -0.0 , 21.0 , 14.0
+Part_0011 , 0 , 8.0 , 8.0
+Trans_0011 , 8.0 , 6.0 , 14.0
+Part_0012 , 0 , 1.0 , 1.0
+Trans_0012 , 1.0 , 5.0 , 6.0
+Part_0013 , 0 , 4.0 , 4.0
+Trans_0013 , 4.0 , 6.0 , 10.0
+Retail_0001 , 8.0 , 4.0 , 5.0
+Retail_0002 , 8.0 , 5.0 , 5.0
+Retail_0003 , 8.0 , 6.0 , 5.0
+Retail_0004 , 7.0 , 6.0 , 5.0
+Retail_0005 , 6.0 , 5.0 , 5.0
+Retail_0006 , 6.0 , 5.0 , 5.0
+Retail_0007 , 40.0 , 6.0 , 5.0
+Retail_0008 , 40.0 , 5.0 , 5.0
+Retail_0009 , 41.0 , 4.0 , 5.0
+Retail_0010 , 10.0 , 4.0 , 5.0
+Retail_0011 , 10.0 , 5.0 , 5.0
+Retail_0012 , 10.0 , 6.0 , 5.0
+Retail_0013 , 9.0 , 6.0 , 5.0
+Retail_0014 , 9.0 , 5.0 , 5.0
+Retail_0015 , 10.0 , 6.0 , 5.0
+Retail_0016 , 9.0 , 6.0 , 5.0
+Retail_0017 , 9.0 , 5.0 , 5.0
+Retail_0018 , 9.0 , 4.0 , 5.0

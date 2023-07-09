@@ -1,0 +1,202 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 417 rows, 459 columns and 874 nonzeros
+Model fingerprint: 0x737dbc58
+Model has 116 general constraints
+Variable types: 232 continuous, 227 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [3e-01, 3e+02]
+  Bounds range     [5e+01, 1e+02]
+  RHS range        [1e+00, 1e+02]
+
+User MIP start did not produce a new incumbent solution
+User MIP start violates constraint a1Trans_0013 by 0.920000000
+Processed MIP start in 1.15 seconds (1.23 work units)
+
+Presolve added 95 rows and 12672 columns
+Presolve time: 0.02s
+Presolved: 512 rows, 13131 columns, 38704 nonzeros
+Presolved model has 116 SOS constraint(s)
+Variable types: 12877 continuous, 254 integer (11 binary)
+
+Root relaxation: objective 4.528763e+03, 591 iterations, 0.01 seconds (0.01 work units)
+Another try with MIP start
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 5487.26643    0   39          - 5487.26643      -     -    1s
+     0     0 5713.72472    0   39          - 5713.72472      -     -    1s
+     0     2 5713.72472    0   39          - 5713.72472      -     -    1s
+  5077  3544 25994.0445  518    3          - 5717.55170      -   2.3    5s
+* 5122  3404             558    26560.107000 5717.55170  78.5%   2.3    5s
+* 5626  3295             538    26104.949396 5852.32260  77.6%   2.3    5s
+H 5773  2450                    24160.888747 5852.32260  75.8%   2.3    5s
+H 5775  1947                    19959.660068 5852.32260  70.7%   2.3    5s
+H 5890  2163                    19857.567627 5852.32260  70.5%   2.3    5s
+H 7557  3135                    19137.858213 5852.32260  69.4%   2.3    7s
+H 7559  2980                    9809.9588391 5852.32260  40.3%   2.3    7s
+H 7559  2830                    9216.3183915 5852.32260  36.5%   2.3    7s
+H 8470  3235                    9216.3183747 5872.66573  36.3%   2.8    8s
+H 8897  3309                    9204.5473364 5872.66573  36.2%   2.8    8s
+H 8898  3162                    9113.1204938 5872.66573  35.6%   2.8    8s
+ 14663  6033 8483.58309  115  242 9113.12049 6228.55300  31.7%   3.0   10s
+H14686  5974                    9113.1204804 6228.55300  31.7%   3.0   10s
+H28247 16479                    9113.1204761 6548.61749  28.1%   3.2   13s
+H28253 16479                    9113.1204708 6548.61749  28.1%   3.2   13s
+H29686 17785                    9113.1204359 6554.01851  28.1%   3.2   13s
+ 33529 20552 8254.37496  106    3 9113.12044 6572.59673  27.9%   3.3   17s
+ 33549 20565 8032.33146   56  943 9113.12044 7306.65610  19.8%   3.3   20s
+ 33564 20577 7318.69863   21  903 9113.12044 7318.69863  19.7%   3.4   25s
+H33565 19547                    9113.1203847 7318.69863  19.7%   3.4   25s
+ 43818 25104 7631.58682   29  884 9113.12038 7393.21303  18.9%   5.5   30s
+ 55011 30880 8235.29320   75  563 9113.12038 7430.18003  18.5%   7.4   35s
+ 73769 39453     cutoff  128      9113.12038 7488.73181  17.8%   9.3   40s
+ 88854 46465 7766.75759   43  812 9113.12038 7515.79456  17.5%  10.2   45s
+ 104974 58475 8186.93388   68  570 9113.12038 7537.56135  17.3%  10.9   50s
+ 123640 72680 8756.50228   65  471 9113.12038 7563.13935  17.0%  11.6   55s
+ 142174 87609 9094.82935   72  488 9113.12038 7579.46705  16.8%  12.1   60s
+ 160739 101893 7910.58962   55  763 9113.12038 7599.63740  16.6%  12.3   65s
+
+Cutting planes:
+  Gomory: 55
+  Projected implied bound: 13
+  MIR: 262
+  Flow cover: 154
+  Zero half: 2
+  RLT: 1
+  Relax-and-lift: 5
+
+Explored 174451 nodes (2177161 simplex iterations) in 68.90 seconds (108.35 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 10: 9113.12 9113.12 9113.12 ... 9809.96
+
+Solve interrupted
+Warning: max constraint violation (1.9411e-01) exceeds tolerance
+Warning: max general constraint violation (1.9411e-01) exceeds tolerance
+  Piecewise linearization of function constraints often causes big violation.
+  Try to adjust the settings of the related parameters, such as FuncPieces.
+Best objective 9.113120384678e+03, best bound 7.609399775452e+03, gap 16.5006%
+
+User-callback calls 358416, time in user-callback 0.56 sec
+ ----------------------------------------
+Time to run:, 68.91629815101624 ,seconds
+The value of the objective using Gurobi is, 9113.12 
+Dist_0001 , 0 , 109.83 , -0.0
+Manuf_0001 , 0.0 , 8.0 , 1.0
+Manuf_0004 , -0.0 , 8.0 , 4.0
+Manuf_0005 , -0.0 , 6.0 , 2.0
+Retail_0001 , 0.0 , 0.0 , 0.0
+Dist_0002 , 0 , 67.17 , -0.0
+Manuf_0002 , -0.0 , 9.0 , -0.0
+Manuf_0006 , 0.0 , 6.0 , -0.0
+Retail_0002 , -0.0 , 5.67 , 0.0
+Retail_0005 , -0.0 , 3.8 , 0.0
+Retail_0006 , -0.0 , 2.9 , 0.0
+Retail_0007 , -0.0 , 0.0 , -0.0
+Retail_0008 , -0.0 , 4.76 , 0.0
+Dist_0003 , 0 , 58.0 , -0.0
+Manuf_0003 , -0.0 , 9.0 , -0.0
+Retail_0003 , -0.0 , 2.88 , 0.0
+Retail_0004 , -0.0 , 4.32 , 0.0
+Retail_0009 , -0.0 , 4.38 , 0.0
+Retail_0010 , -0.0 , 3.56 , 0.0
+Retail_0011 , 5.0 , 0.0 , 5.0
+Dist_0004 , 0 , 105.96 , -0.0
+Manuf_0007 , -0.0 , 6.0 , -0.0
+Retail_0012 , -0.0 , 3.36 , 0.0
+Retail_0013 , -0.0 , 0.0 , -0.0
+Retail_0014 , -0.0 , 4.65 , 0.0
+Retail_0015 , -0.0 , 3.39 , 0.0
+Retail_0016 , -0.0 , 5.32 , 0.0
+Dist_0005 , 0 , 49.0 , -0.0
+Manuf_0008 , -0.0 , 9.0 , -0.0
+Manuf_0009 , -0.0 , 9.0 , -0.0
+Retail_0017 , -0.0 , 2.57 , 0.0
+Retail_0018 , -0.0 , 3.77 , 0.0
+Retail_0019 , -0.0 , 4.05 , 0.0
+Retail_0020 , 5.0 , 0.0 , 5.0
+Retail_0021 , -0.0 , 6.1 , 0.0
+Retail_0022 , 4.0 , 0.0 , 4.0
+Trans_0001 , 1.0 , 4.1 , 5.0
+Trans_0002 , 1.0 , 10.02 , 1.0
+Trans_0003 , 1.0 , 6.48 , 1.0
+Trans_0004 , 3.0 , 3.21 , 6.0
+Retail_0023 , -0.0 , 0.0 , -0.0
+Trans_0005 , -0.0 , 4.95 , -0.0
+Trans_0006 , 0.0 , 11.49 , -0.0
+Trans_0007 , 0.0 , 6.6 , 6.0
+Trans_0008 , 0.0 , 4.73 , 3.0
+Retail_0024 , -0.0 , 0.0 , -0.0
+Trans_0009 , -0.0 , 6.07 , 6.0
+Trans_0010 , -0.0 , 14.17 , 1.0
+Trans_0011 , 0.0 , 7.96 , 5.0
+Trans_0012 , 0.0 , 4.47 , 3.0
+Retail_0025 , 4.0 , 0.0 , 4.0
+Trans_0013 , 4.0 , 4.08 , 2.0
+Trans_0014 , 4.0 , 13.8 , 4.0
+Trans_0015 , 4.0 , 7.24 , 1.0
+Trans_0016 , 4.0 , 3.53 , 4.0
+Retail_0026 , 2.0 , 0.0 , 2.0
+Trans_0017 , 2.0 , 4.16 , 6.0
+Trans_0018 , 4.0 , 12.49 , 16.0
+Trans_0019 , 2.0 , 5.34 , 7.0
+Trans_0020 , 2.0 , 3.92 , 3.0
+Retail_0027 , -0.0 , 0.0 , -0.0
+Trans_0021 , -0.0 , 4.35 , 4.0
+Trans_0022 , -0.0 , 8.11 , 5.0
+Trans_0023 , -0.0 , 5.49 , 4.0
+Trans_0024 , -0.0 , 5.48 , 1.0
+Retail_0028 , -0.0 , 0.0 , -0.0
+Trans_0025 , 0.0 , 5.9 , 5.0
+Trans_0026 , -0.0 , 7.78 , 2.0
+Trans_0027 , -0.0 , 9.0 , 4.0
+Trans_0028 , 0.0 , 3.15 , 2.0
+Retail_0029 , -0.0 , 0.0 , -0.0
+Trans_0029 , 0.0 , 3.4 , 3.0
+Trans_0030 , -0.0 , 8.51 , 6.0
+Trans_0031 , -0.0 , 8.54 , 5.0
+Trans_0032 , -0.0 , 3.92 , 3.0
+Retail_0030 , -0.0 , 0.0 , -0.0
+Trans_0033 , 0.0 , 5.94 , 1.0
+Trans_0034 , 0.0 , 8.2 , 2.0
+Trans_0035 , -0.0 , 5.83 , 4.0
+Trans_0036 , 0.0 , 4.5 , 4.0
+Retail_0031 , 5.0 , 0.0 , 5.0
+Retail_0032 , 1.0 , 0.0 , 1.0
+Retail_0033 , 1.0 , 0.0 , 1.0
+Retail_0034 , 6.0 , 0.0 , 6.0
+Retail_0035 , -0.0 , 0.0 , 0.0
+Retail_0036 , -0.0 , 0.0 , 0.0
+Retail_0037 , 6.0 , 0.0 , 6.0
+Retail_0038 , 3.0 , 0.0 , 3.0
+Retail_0039 , 6.0 , 0.0 , 6.0
+Retail_0040 , 1.0 , 0.0 , 1.0
+Retail_0041 , 5.0 , 0.0 , 5.0
+Retail_0042 , 3.0 , 0.0 , 3.0
+Retail_0043 , 2.0 , 0.0 , 2.0
+Retail_0044 , 4.0 , 0.0 , 4.0
+Retail_0045 , 1.0 , 0.0 , 1.0
+Retail_0046 , 4.0 , 0.0 , 4.0
+Retail_0047 , 6.0 , 0.0 , 6.0
+Retail_0048 , 16.0 , 0.0 , 16.0
+Retail_0049 , 7.0 , 0.0 , 7.0
+Retail_0050 , 3.0 , 0.0 , 3.0
+Retail_0051 , 6.0 , 0.0 , 6.0
+Retail_0052 , 5.0 , 0.0 , 5.0
+Retail_0053 , 4.0 , 0.0 , 4.0
+Retail_0054 , 1.0 , 0.0 , 1.0
+Retail_0055 , 5.0 , 0.0 , 5.0
+Retail_0056 , 2.0 , 0.0 , 2.0
+Retail_0057 , 4.0 , 0.0 , 4.0
+Retail_0058 , 2.0 , 0.0 , 2.0
+Retail_0059 , 3.0 , 0.0 , 3.0
+Retail_0060 , 6.0 , 0.0 , 6.0
+Retail_0061 , 5.0 , 0.0 , 5.0
+Retail_0062 , 5.0 , 0.0 , 5.0
+Retail_0063 , 1.0 , 0.0 , 1.0
+Retail_0064 , 2.0 , 0.0 , 2.0
+Retail_0065 , 4.0 , 0.0 , 4.0
+Retail_0066 , 5.0 , 0.0 , 5.0
