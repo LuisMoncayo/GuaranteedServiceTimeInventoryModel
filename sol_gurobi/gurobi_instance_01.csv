@@ -1,0 +1,53 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 29 rows, 29 columns and 57 nonzeros
+Model fingerprint: 0xb43c6171
+Model has 8 general constraints
+Variable types: 16 continuous, 13 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [4e+01, 8e+02]
+  Bounds range     [1e+01, 4e+01]
+  RHS range        [1e+01, 3e+01]
+
+User MIP start produced solution with objective 3965.46 (0.01s)
+Loaded user MIP start with objective 3965.46
+
+Presolve added 7 rows and 1804 columns
+Presolve time: 0.00s
+Presolved: 36 rows, 1833 columns, 5465 nonzeros
+Presolved model has 8 SOS constraint(s)
+Found heuristic solution: objective 3965.4542348
+Variable types: 1821 continuous, 12 integer (0 binary)
+
+Root relaxation: objective 2.748322e+03, 22 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 2768.95484    0    3 3965.45423 2768.95484  30.2%     -    0s
+     0     0 3959.58654    0    3 3965.45423 3959.58654  0.15%     -    0s
+     0     2 3959.58654    0    3 3965.45423 3959.58654  0.15%     -    0s
+
+Explored 36 nodes (99 simplex iterations) in 0.25 seconds (0.22 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 2: 3965.45 3965.46 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (1.2331e-05) exceeds tolerance
+Warning: max general constraint violation (1.2331e-05) exceeds tolerance
+Best objective 3.965454234840e+03, best bound 3.965058782054e+03, gap 0.0100%
+
+User-callback calls 318, time in user-callback 0.00 sec
+ ----------------------------------------
+Time to run:, 0.27161169052124023 ,seconds
+The value of the objective using Gurobi is, 3965.45 
+Manuf_0001 , 0.0 , 10 , 0.0
+Retail_0001 , 0.0 , 0 , 0.0
+Retail_0002 , 0.0 , 0 , 0.0
+Manuf_0002 , 0.0 , 10 , 0.0
+Retail_0003 , 0.0 , 0 , 0.0
+Part_0001 , 0 , 28 , 0.0
+Part_0002 , 0 , 15 , 0.0
+Part_0003 , 0 , 10 , 0.0
