@@ -1,0 +1,69 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 92 rows, 84 columns and 189 nonzeros
+Model fingerprint: 0xd9988812
+Model has 22 general constraints
+Variable types: 44 continuous, 40 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+02, 5e+02]
+  Bounds range     [9e+01, 2e+02]
+  RHS range        [1e+01, 1e+02]
+
+User MIP start produced solution with objective 37674.5 (0.00s)
+Loaded user MIP start with objective 37674.5
+
+Presolve added 12 rows and 3208 columns
+Presolve time: 0.01s
+Presolved: 104 rows, 3292 columns, 9787 nonzeros
+Presolved model has 21 SOS constraint(s)
+Found heuristic solution: objective 37501.270658
+Variable types: 3253 continuous, 39 integer (0 binary)
+
+Root relaxation: objective 2.458792e+04, 135 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 24587.9199    0    7 37501.2707 24587.9199  34.4%     -    0s
+H    0     0                    28086.565612 24587.9199  12.5%     -    0s
+     0     0 26406.4142    0    7 28086.5656 26406.4142  5.98%     -    0s
+     0     2 26406.4142    0    7 28086.5656 26406.4142  5.98%     -    0s
+H   30    19                    27978.615560 26406.4142  5.62%   2.7    0s
+
+Explored 1192 nodes (2136 simplex iterations) in 0.86 seconds (0.67 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 4: 27978.6 28086.6 37501.3 37674.5 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (3.7132e-05) exceeds tolerance
+Warning: max general constraint violation (3.7132e-05) exceeds tolerance
+Best objective 2.797861556000e+04, best bound 2.797861556000e+04, gap 0.0000%
+
+User-callback calls 2790, time in user-callback 0.01 sec
+ ----------------------------------------
+Time to run:, 0.8678698539733887 ,seconds
+The value of the objective using Gurobi is, 27978.62 
+Dist_0001 , 35.0 , 35 , -0.0
+Dist_0008 , 0.0 , 14 , 0.0
+Dist_0009 , 0.0 , 14 , 0.0
+Dist_0010 , 0.0 , 0 , 0.0
+Dist_0004 , 35.0 , 35 , 0.0
+Dist_0011 , 0.0 , 0 , 0.0
+Manuf_0001 , 0.0 , 35 , 35.0
+Manuf_0002 , 0.0 , 35 , 35.0
+Dist_0002 , 35.0 , 35 , 0.0
+Manuf_0003 , 0.0 , 35 , 35.0
+Dist_0003 , 35.0 , 35 , 0.0
+Manuf_0004 , 0.0 , 35 , 35.0
+Manuf_0005 , 0.0 , 35 , 35.0
+Dist_0005 , 35.0 , 35 , 0.0
+Manuf_0006 , 0.0 , 35 , 35.0
+Dist_0006 , 35.0 , 35 , 0.0
+Manuf_0007 , 0.0 , 35 , 35.0
+Dist_0007 , 35.0 , 35 , 0.0
+Part_0001 , 0 , 90 , -0.0
+Part_0002 , 0 , 120 , -0.0
+Part_0003 , 0 , 120 , -0.0
+Part_0004 , 0 , 0 , 0.0

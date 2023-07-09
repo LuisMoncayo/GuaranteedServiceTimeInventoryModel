@@ -1,0 +1,148 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 678 rows, 334 columns and 1258 nonzeros
+Model fingerprint: 0xb7f0218d
+Model has 108 general constraints
+Variable types: 216 continuous, 118 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+03, 2e+05]
+  Bounds range     [7e+00, 3e+01]
+  RHS range        [3e+00, 2e+01]
+
+User MIP start produced solution with objective 3.48068e+06 (0.00s)
+Loaded user MIP start with objective 3.48068e+06
+
+Presolve added 98 rows and 11849 columns
+Presolve time: 0.02s
+Presolved: 776 rows, 12183 columns, 36805 nonzeros
+Presolved model has 108 SOS constraint(s)
+Variable types: 12075 continuous, 108 integer (0 binary)
+
+Root relaxation: cutoff, 233 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0     cutoff    0      3480677.62 3480677.62  0.00%     -    0s
+
+Explored 1 nodes (233 simplex iterations) in 0.06 seconds (0.05 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 1: 3.48068e+06 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.480677616957e+06, best bound 3.480677616957e+06, gap 0.0000%
+
+User-callback calls 266, time in user-callback 0.00 sec
+ ----------------------------------------
+Time to run:, 0.08164501190185547 ,seconds
+The value of the objective using Gurobi is, 3480677.62 
+Manuf_0001 , 0 , 14 , 0.0
+Manuf_0099 , 0.0 , 4 , 0.0
+Manuf_0101 , 0.0 , 4 , 0.0
+Manuf_0102 , 0.0 , 6 , 0.0
+Manuf_0103 , 0.0 , 3 , 0.0
+Manuf_0104 , 0.0 , 4 , 0.0
+Manuf_0107 , 0.0 , 4 , 0.0
+Manuf_0002 , 0 , 15 , 0.0
+Manuf_0106 , 0.0 , 4 , 0.0
+Manuf_0003 , 0 , 14 , 0.0
+Manuf_0004 , 0 , 12 , 0.0
+Manuf_0005 , 0 , 20 , 0.0
+Manuf_0006 , 0 , 15 , 0.0
+Manuf_0007 , 0 , 17 , 0.0
+Manuf_0100 , 0.0 , 4 , 0.0
+Manuf_0108 , 0.0 , 3 , 0.0
+Manuf_0008 , 0 , 9 , 0.0
+Manuf_0009 , 0 , 14 , 0.0
+Manuf_0010 , 0 , 12 , 0.0
+Manuf_0011 , 0 , 19 , 0.0
+Manuf_0012 , 0 , 13 , 0.0
+Manuf_0105 , 0.0 , 5 , 0.0
+Manuf_0013 , 0 , 12 , 0.0
+Manuf_0014 , 0 , 9 , 0.0
+Manuf_0015 , 0 , 14 , 0.0
+Manuf_0016 , 0 , 12 , 0.0
+Manuf_0017 , 0 , 9 , 0.0
+Manuf_0018 , 0 , 12 , 0.0
+Manuf_0019 , 0 , 17 , 0.0
+Manuf_0020 , 0 , 13 , 0.0
+Manuf_0021 , 0 , 18 , 0.0
+Manuf_0022 , 0 , 8 , 0.0
+Manuf_0023 , 0 , 9 , 0.0
+Manuf_0024 , 0 , 19 , 0.0
+Manuf_0025 , 0 , 17 , 0.0
+Manuf_0026 , 0 , 12 , 0.0
+Manuf_0027 , 0 , 19 , 0.0
+Manuf_0028 , 0 , 17 , 0.0
+Manuf_0029 , 0 , 10 , 0.0
+Manuf_0030 , 0 , 13 , 0.0
+Manuf_0031 , 0 , 10 , 0.0
+Manuf_0032 , 0 , 16 , 0.0
+Manuf_0033 , 0 , 11 , 0.0
+Manuf_0034 , 0 , 9 , 0.0
+Manuf_0035 , 0 , 14 , 0.0
+Manuf_0036 , 0 , 14 , 0.0
+Manuf_0037 , 0 , 13 , 0.0
+Manuf_0038 , 0 , 8 , 0.0
+Manuf_0039 , 0 , 12 , 0.0
+Manuf_0040 , 0 , 13 , 0.0
+Manuf_0041 , 0 , 14 , 0.0
+Manuf_0042 , 0 , 15 , 0.0
+Manuf_0043 , 0 , 17 , 0.0
+Manuf_0044 , 0 , 13 , 0.0
+Manuf_0045 , 0 , 14 , 0.0
+Manuf_0046 , 0 , 18 , 0.0
+Manuf_0047 , 0 , 11 , 0.0
+Manuf_0048 , 0 , 20 , 0.0
+Manuf_0049 , 0 , 19 , 0.0
+Manuf_0050 , 0 , 11 , 0.0
+Manuf_0051 , 0 , 14 , 0.0
+Manuf_0052 , 0 , 20 , 0.0
+Manuf_0053 , 0 , 14 , 0.0
+Manuf_0054 , 0 , 18 , 0.0
+Manuf_0055 , 0 , 14 , 0.0
+Manuf_0056 , 0 , 19 , 0.0
+Manuf_0057 , 0 , 15 , 0.0
+Manuf_0058 , 0 , 12 , 0.0
+Manuf_0059 , 0 , 15 , 0.0
+Manuf_0060 , 0 , 13 , 0.0
+Manuf_0061 , 0 , 13 , 0.0
+Manuf_0062 , 0 , 13 , 0.0
+Manuf_0063 , 0 , 20 , 0.0
+Manuf_0064 , 0 , 14 , 0.0
+Manuf_0065 , 0 , 13 , 0.0
+Manuf_0066 , 0 , 13 , 0.0
+Manuf_0067 , 0 , 14 , 0.0
+Manuf_0068 , 0 , 18 , 0.0
+Manuf_0069 , 0 , 16 , 0.0
+Manuf_0070 , 0 , 14 , 0.0
+Manuf_0071 , 0 , 14 , 0.0
+Manuf_0072 , 0 , 11 , 0.0
+Manuf_0073 , 0 , 13 , 0.0
+Manuf_0074 , 0 , 14 , 0.0
+Manuf_0075 , 0 , 19 , 0.0
+Manuf_0076 , 0 , 12 , 0.0
+Manuf_0077 , 0 , 9 , 0.0
+Manuf_0078 , 0 , 7 , 0.0
+Manuf_0079 , 0 , 13 , 0.0
+Manuf_0080 , 0 , 17 , 0.0
+Manuf_0081 , 0 , 12 , 0.0
+Manuf_0082 , 0 , 17 , 0.0
+Manuf_0083 , 0 , 17 , 0.0
+Manuf_0084 , 0 , 11 , 0.0
+Manuf_0085 , 0 , 19 , 0.0
+Manuf_0086 , 0 , 17 , 0.0
+Manuf_0087 , 0 , 18 , 0.0
+Manuf_0088 , 0 , 12 , 0.0
+Manuf_0089 , 0 , 14 , 0.0
+Manuf_0090 , 0 , 10 , 0.0
+Manuf_0091 , 0 , 16 , 0.0
+Manuf_0092 , 0 , 18 , 0.0
+Manuf_0093 , 0 , 16 , 0.0
+Manuf_0094 , 0 , 9 , 0.0
+Manuf_0095 , 0 , 13 , 0.0
+Manuf_0096 , 0 , 13 , 0.0
+Manuf_0097 , 0 , 12 , 0.0
+Manuf_0098 , 0 , 18 , 0.0

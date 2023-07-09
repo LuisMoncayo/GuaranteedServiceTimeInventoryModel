@@ -1,0 +1,103 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 305 rows, 187 columns and 565 nonzeros
+Model fingerprint: 0x92354244
+Model has 58 general constraints
+Variable types: 116 continuous, 71 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [5e+00, 1e+04]
+  Bounds range     [6e+00, 2e+02]
+  RHS range        [5e+00, 1e+02]
+
+User MIP start produced solution with objective 600356 (0.00s)
+Loaded user MIP start with objective 600356
+
+Presolve added 50 rows and 6828 columns
+Presolve time: 0.01s
+Presolved: 355 rows, 7015 columns, 21034 nonzeros
+Presolved model has 58 SOS constraint(s)
+Found heuristic solution: objective 600355.87265
+Variable types: 6947 continuous, 68 integer (0 binary)
+
+Root relaxation: objective 5.964241e+05, 234 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 598410.090    0    7 600355.873 598410.090  0.32%     -    0s
+     0     0 600126.992    0    7 600355.873 600126.992  0.04%     -    0s
+     0     2 600126.992    0    7 600355.873 600126.992  0.04%     -    0s
+
+Explored 26 nodes (434 simplex iterations) in 0.49 seconds (0.47 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 2: 600356 600356 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (3.1956e-05) exceeds tolerance
+Warning: max general constraint violation (3.1956e-05) exceeds tolerance
+Best objective 6.003558726510e+05, best bound 6.003130658816e+05, gap 0.0071%
+
+User-callback calls 471, time in user-callback 0.00 sec
+ ----------------------------------------
+Time to run:, 0.5027608871459961 ,seconds
+The value of the objective using Gurobi is, 600355.87 
+Part_0001 , 0 , 39 , 0.0
+Manuf_0001 , 0.0 , 6 , 0.0
+Part_0002 , 0 , 26 , 0.0
+Manuf_0002 , 0.0 , 6 , 0.0
+Part_0003 , 0 , 22 , 0.0
+Manuf_0003 , 0.0 , 20 , 0.0
+Part_0004 , 0 , 46 , 0.0
+Manuf_0004 , 0.0 , 6 , 0.0
+Part_0005 , 0 , 24 , 0.0
+Manuf_0005 , 0.0 , 5 , 0.0
+Part_0006 , 0 , 55 , 0.0
+Manuf_0006 , 0.0 , 10 , 0.0
+Part_0007 , 0 , 95 , 0.0
+Part_0008 , 0 , 31 , 0.0
+Part_0009 , 0 , 10 , 0.0
+Part_0010 , 0 , 43 , 0.0
+Part_0011 , 0 , 28 , 0.0
+Part_0012 , 0 , 10 , 0.0
+Part_0013 , 0 , 53 , 0.0
+Part_0014 , 0 , 31 , 0.0
+Part_0015 , 0 , 9 , 0.0
+Part_0016 , 0 , 31 , 0.0
+Part_0017 , 0 , 52 , 0.0
+Part_0018 , 0 , 42 , 0.0
+Part_0019 , 0 , 35 , 0.0
+Part_0020 , 0 , 44 , 0.0
+Part_0021 , 0 , 118 , 0.0
+Part_0022 , 0 , 56 , 0.0
+Part_0023 , 0 , 27 , 0.0
+Part_0024 , 0 , 122 , 0.0
+Part_0025 , 0 , 57 , 0.0
+Part_0026 , 0 , 56 , 0.0
+Part_0027 , 0 , 6 , 0.0
+Part_0028 , 0 , 46 , 0.0
+Part_0029 , 0 , 49 , 0.0
+Part_0030 , 0 , 34 , 0.0
+Part_0031 , 0 , 55 , 0.0
+Part_0032 , 0 , 37 , 0.0
+Part_0033 , 0 , 47 , 0.0
+Part_0034 , 0 , 44 , 0.0
+Part_0035 , 0 , 51 , 0.0
+Part_0036 , 0 , 34 , 0.0
+Manuf_0007 , 5.0 , 5 , 10.0
+Manuf_0008 , 0.0 , 23 , 10.0
+Manuf_0009 , 4.0 , 6 , 10.0
+Manuf_0010 , 2.0 , 8 , 10.0
+Manuf_0011 , 3.0 , 6 , 9.0
+Manuf_0012 , 4.0 , 6 , 10.0
+Manuf_0013 , 0.0 , 50 , 10.0
+Part_0037 , 0 , 40 , 4.0
+Part_0038 , 0 , 49 , 0.0
+Part_0039 , 0 , 53 , 0.0
+Part_0040 , 0 , 31 , 0.0
+Part_0041 , 0 , 63 , 2.0
+Part_0042 , 0 , 52 , 2.0
+Part_0043 , 0 , 112 , 0.0
+Part_0044 , 0 , 52 , 0.0
+Part_0045 , 0 , 37 , 0.0

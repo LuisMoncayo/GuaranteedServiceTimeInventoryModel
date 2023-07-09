@@ -1,0 +1,73 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 96 rows, 106 columns and 196 nonzeros
+Model fingerprint: 0xdd2d93c0
+Model has 28 general constraints
+Variable types: 56 continuous, 50 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [3e-01, 6e+00]
+  Bounds range     [5e+01, 1e+02]
+  RHS range        [2e+00, 6e+01]
+
+User MIP start produced solution with objective 258.395 (0.00s)
+Loaded user MIP start with objective 258.395
+
+Presolve added 26 rows and 3810 columns
+Presolve time: 0.01s
+Presolved: 122 rows, 3916 columns, 11606 nonzeros
+Presolved model has 28 SOS constraint(s)
+Found heuristic solution: objective 258.3935125
+Variable types: 3868 continuous, 48 integer (0 binary)
+
+Root relaxation: objective 2.165098e+02, 145 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  216.50984    0   10  258.39351  216.50984  16.2%     -    0s
+     0     0  233.61304    0   10  258.39351  233.61304  9.59%     -    0s
+     0     2  233.61304    0   10  258.39351  233.61304  9.59%     -    0s
+
+Explored 10298 nodes (24096 simplex iterations) in 1.57 seconds (1.59 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 2: 258.394 258.395 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (7.4113e-05) exceeds tolerance
+Warning: max general constraint violation (7.4113e-05) exceeds tolerance
+Best objective 2.583935125339e+02, best bound 2.583935125339e+02, gap 0.0000%
+
+User-callback calls 21140, time in user-callback 0.04 sec
+ ----------------------------------------
+Time to run:, 1.574110984802246 ,seconds
+The value of the objective using Gurobi is, 258.39 
+Manuf_0001 , 0 , 53 , 0.0
+Trans_0001 , 0.0 , 2 , 2.0
+Manuf_0002 , 0 , 60 , 0.0
+Trans_0002 , 0.0 , 2 , 2.0
+Manuf_0003 , 0 , 53 , 0.0
+Trans_0003 , 0.0 , 2 , 2.0
+Manuf_0004 , 0 , 53 , 0.0
+Trans_0004 , 0.0 , 2 , 2.0
+Manuf_0005 , 0 , 60 , 0.0
+Trans_0005 , 0.0 , 2 , 2.0
+Manuf_0006 , 0 , 53 , 0.0
+Trans_0006 , 0.0 , 2 , 2.0
+Manuf_0007 , 2.0 , 20 , 0.0
+Dist_0001 , 0.0 , 9 , 0.0
+Dist_0002 , 0.0 , 2 , 0.0
+Dist_0003 , 0.0 , 14 , 0.0
+Manuf_0008 , 2.0 , 20 , 0.0
+Dist_0004 , 0.0 , 9 , 0.0
+Dist_0005 , 0.0 , 2 , 0.0
+Dist_0006 , 0.0 , 14 , 0.0
+Manuf_0009 , 2.0 , 18 , 0.0
+Dist_0007 , 0.0 , 9 , 0.0
+Dist_0008 , 0.0 , 2 , 0.0
+Dist_0009 , 0.0 , 14 , 0.0
+Manuf_0010 , 2.0 , 18 , 0.0
+Dist_0010 , 0.0 , 9 , 0.0
+Dist_0011 , 0.0 , 2 , 0.0
+Dist_0012 , 0.0 , 14 , 0.0

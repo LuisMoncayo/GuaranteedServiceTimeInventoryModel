@@ -1,0 +1,213 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 483 rows, 550 columns and 972 nonzeros
+Model fingerprint: 0x777684ef
+Model has 156 general constraints
+Variable types: 312 continuous, 238 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [4e+01, 9e+03]
+  Bounds range     [1e+00, 2e+02]
+  RHS range        [1e+00, 8e+01]
+
+User MIP start did not produce a new incumbent solution
+User MIP start violates constraint a1Manuf_0007 by 1.000000000
+
+Presolve added 0 rows and 7182 columns
+Presolve removed 364 rows and 0 columns
+Presolve time: 0.32s
+Presolved: 119 rows, 7732 columns, 23039 nonzeros
+Presolved model has 28 SOS constraint(s)
+Variable types: 7678 continuous, 54 integer (2 binary)
+
+Root relaxation: objective 9.675970e+04, 95 iterations, 0.00 seconds (0.00 work units)
+Another try with MIP start
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 101821.865    0   16          - 101821.865      -     -    0s
+H    0     0                    152626.33815 101821.865  33.3%     -    0s
+     0     0 111805.744    0   16 152626.338 111805.744  26.7%     -    0s
+     0     2 111805.744    0   16 152626.338 111805.744  26.7%     -    1s
+H   32    31                    152335.62593 113064.889  25.8%   2.7    1s
+H  273   162                    143668.70043 113064.889  21.3%   2.4    1s
+H  694   328                    143210.96556 113064.889  21.1%   2.1    1s
+H 2823   704                    140719.89423 127283.856  9.55%   2.3    2s
+H 4371   754                    139873.68223 132405.452  5.34%   2.6    4s
+* 5201   647             108    139830.35298 138091.032  1.24%   2.7    4s
+* 5335   608             111    139577.83070 138091.032  1.07%   2.7    4s
+* 5388   551             107    139497.57170 138091.032  1.01%   2.7    4s
+
+Explored 5872 nodes (15131 simplex iterations) in 4.30 seconds (4.54 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 9: 139498 139578 139830 ... 152626
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (5.5032e-03) exceeds tolerance
+Warning: max general constraint violation (5.5032e-03) exceeds tolerance
+  Piecewise linearization of function constraints often causes big violation.
+  Try to adjust the settings of the related parameters, such as FuncPieces.
+Best objective 1.394975717004e+05, best bound 1.394975717004e+05, gap 0.0000%
+
+User-callback calls 12929, time in user-callback 0.03 sec
+ ----------------------------------------
+Time to run:, 2754.9066519737244 ,seconds
+The value of the objective using Gurobi is, 139497.57 
+Manuf_0001 , 3.0 , 3.45 , 6.0
+Manuf_0003 , 6.0 , 2.0 , 8.0
+Manuf_0002 , 3.0 , 3.45 , 6.0
+Manuf_0006 , 8.0 , 1.0 , 9.0
+Manuf_0004 , 4.0 , 1.0 , 5.0
+Manuf_0008 , 5.0 , 3.45 , 8.0
+Manuf_0005 , 7.0 , 2.0 , 9.0
+Manuf_0009 , 18.0 , 2.0 , 20.0
+Manuf_0010 , 9.0 , 2.0 , 11.0
+Manuf_0007 , 2.0 , 3.0 , 5.0
+Trans_0005 , 5.0 , 3.45 , 8.0
+Trans_0008 , 8.0 , 1.0 , 9.0
+Trans_0018 , 20.0 , 3.45 , 23.0
+Trans_0019 , 20.0 , 22.8 , 42.0
+Trans_0017 , 11.0 , 3.45 , 14.0
+Trans_0028 , 11.0 , 32.6 , 43.0
+Manuf_0011 , 2.0 , 3.45 , 5.0
+Manuf_0015 , 5.0 , 1.0 , 6.0
+Manuf_0012 , 13.0 , 18.0 , 31.0
+Manuf_0018 , 31.0 , 1.0 , 32.0
+Manuf_0013 , 34.0 , 1.0 , 35.0
+Manuf_0039 , 35.0 , 2.0 , 37.0
+Manuf_0014 , 15.0 , 2.0 , 17.0
+Manuf_0043 , 44.0 , 1.0 , -0.0
+Manuf_0016 , 43.0 , 1.0 , 44.0
+Manuf_0017 , 6.0 , 1.0 , 7.0
+Manuf_0019 , 38.0 , 45.0 , 44.0
+Manuf_0020 , 21.0 , 2.0 , 23.0
+Manuf_0021 , 78.0 , 1.0 , 44.0
+Manuf_0022 , 24.0 , 2.0 , 26.0
+Manuf_0023 , 43.0 , 1.0 , 44.0
+Manuf_0024 , 32.0 , 2.0 , 34.0
+Manuf_0025 , 24.0 , 2.0 , 26.0
+Manuf_0026 , 27.0 , 1.0 , 28.0
+Manuf_0027 , 15.0 , 1.0 , 16.0
+Manuf_0028 , 23.0 , 1.0 , 24.0
+Manuf_0029 , 43.0 , 2.0 , 45.0
+Manuf_0044 , 79.0 , 3.7 , -0.0
+Manuf_0030 , 21.0 , 80.0 , 79.0
+Manuf_0031 , 43.0 , 2.0 , 45.0
+Manuf_0032 , 27.0 , 1.0 , 28.0
+Manuf_0033 , 21.0 , 1.0 , 22.0
+Manuf_0034 , 26.0 , 2.0 , 28.0
+Manuf_0035 , 29.0 , 1.0 , 30.0
+Manuf_0036 , 20.0 , 1.0 , 21.0
+Manuf_0037 , 30.0 , 2.0 , 32.0
+Manuf_0038 , 44.0 , 1.0 , 45.0
+Manuf_0040 , 3.0 , 2.0 , 5.0
+Manuf_0041 , 39.0 , 1.0 , 40.0
+Manuf_0042 , 17.0 , 1.0 , 18.0
+Trans_0031 , 0.0 , 7.0 , 4.0
+Trans_0032 , 0.0 , 9.0 , 4.0
+Trans_0033 , 0.0 , 3.0 , 3.0
+Trans_0034 , -0.0 , 50.5 , 4.0
+Trans_0035 , 0.0 , 17.55 , 4.0
+Trans_0036 , 0.0 , 53.5 , 4.0
+Part_0001 , 0 , 3.45 , 3.0
+Part_0002 , 0 , 3.45 , 3.0
+Part_0003 , 0 , 4.0 , 4.0
+Part_0004 , 0 , 7.0 , 7.0
+Part_0005 , 0 , 2.0 , 2.0
+Part_0006 , 0 , 2.0 , 2.0
+Part_0007 , 0 , 2.0 , 2.0
+Part_0008 , 0 , 1.0 , 1.0
+Part_0009 , 0 , 17.4 , 17.0
+Part_0010 , 0 , 13.0 , 13.0
+Part_0011 , 0 , 18.5 , 18.0
+Part_0012 , 0 , 17.4 , 17.0
+Part_0013 , 0 , 8.0 , 8.0
+Part_0014 , 0 , 1.0 , 1.0
+Trans_0001 , 1.0 , 12.0 , 13.0
+Trans_0002 , 1.0 , 33.6 , 34.0
+Part_0015 , 0 , 2.0 , 2.0
+Part_0016 , 0 , 4.0 , 4.0
+Trans_0003 , 4.0 , 3.45 , 7.0
+Part_0017 , 0 , 2.0 , 2.0
+Trans_0004 , 2.0 , 3.45 , 5.0
+Part_0018 , 0 , 3.0 , 3.0
+Trans_0006 , 3.0 , 3.45 , 6.0
+Part_0019 , 0 , 2.0 , 2.0
+Trans_0007 , 2.0 , 3.45 , 5.0
+Part_0020 , 0 , 1.0 , 0.0
+Trans_0009 , 0.0 , 38.2 , 38.0
+Trans_0020 , 0.0 , 21.7 , 20.999999999999996
+Part_0021 , 0 , 18.0 , 18.0
+Trans_0010 , 18.0 , 3.45 , 21.0
+Trans_0021 , 18.0 , 25.0 , 43.0
+Part_0022 , 0 , 2.0 , 2.0
+Trans_0011 , 2.0 , 76.0 , 78.0
+Trans_0022 , 2.0 , 25.0 , 27.0
+Part_0023 , 0 , 2.0 , 2.0
+Trans_0012 , 2.0 , 22.8 , 24.0
+Trans_0023 , 2.0 , 19.5 , 21.0
+Part_0024 , 0 , 3.45 , 0.0
+Trans_0013 , 0.0 , 43.4 , 42.99999999999999
+Trans_0024 , 3.0 , 22.8 , 25.0
+Part_0025 , 0 , 3.45 , 3.0
+Trans_0014 , 3.0 , 29.3 , 32.0
+Trans_0025 , 3.0 , 26.0 , 29.0
+Part_0026 , 0 , 3.45 , 3.0
+Trans_0015 , 3.0 , 20.7 , 22.999999999999996
+Trans_0026 , 3.0 , 17.4 , 19.999999999999996
+Part_0027 , 0 , 1.0 , 1.0
+Trans_0016 , 1.0 , 26.0 , 27.0
+Trans_0027 , 1.0 , 29.3 , 30.0
+Part_0028 , 0 , 3.45 , 3.0
+Trans_0029 , 3.0 , 2.0 , 5.0
+Part_0029 , 0 , 3.45 , 3.0
+Trans_0030 , 3.0 , 2.0 , 5.0
+Part_0030 , 0 , 3.45 , 3.0
+Part_0031 , 0 , 15.0 , 15.0
+Part_0032 , 0 , 10.0 , 10.0
+Part_0033 , 0 , 45.7 , 43.0
+Part_0034 , 0 , 3.45 , 3.0
+Part_0035 , 0 , 30.0 , 30.0
+Part_0036 , 0 , 30.0 , 30.0
+Part_0037 , 0 , 3.0 , 3.0
+Part_0038 , 0 , 3.45 , 3.0
+Part_0039 , 0 , 3.45 , 3.0
+Part_0040 , 0 , 3.45 , 3.0
+Part_0041 , 0 , 3.45 , 3.0
+Part_0042 , 0 , 3.45 , 3.0
+Part_0043 , 0 , 39.1 , 39.0
+Part_0044 , 0 , 3.45 , 3.0
+Part_0045 , 0 , 17.4 , 17.0
+Part_0046 , 0 , 3.45 , 3.0
+Part_0047 , 0 , 15.0 , 15.0
+Part_0048 , 0 , 19.0 , 19.0
+Part_0049 , 0 , 18.0 , 18.0
+Part_0050 , 0 , 1.0 , 1.0
+Part_0051 , 0 , 15.0 , 15.0
+Part_0052 , 0 , 1.0 , 1.0
+Part_0053 , 0 , 1.0 , 1.0
+Part_0054 , 0 , 1.0 , 1.0
+Part_0055 , 0 , 42.0 , 42.0
+Part_0056 , 0 , 1.0 , 1.0
+Part_0057 , 0 , 19.0 , 19.0
+Part_0058 , 0 , 12.0 , 12.0
+Part_0059 , 0 , 28.0 , 28.0
+Part_0060 , 0 , 17.0 , 17.0
+Part_0061 , 0 , 25.0 , 25.0
+Part_0062 , 0 , 36.0 , 36.0
+Part_0063 , 0 , 2.0 , 2.0
+Part_0064 , 0 , 47.0 , 47.0
+Part_0065 , 0 , 12.0 , 12.0
+Part_0066 , 0 , 3.0 , 3.0
+Part_0067 , 0 , 4.0 , 4.0
+Part_0068 , 0 , 2.0 , 2.0
+Part_0069 , 0 , 36.0 , 36.0
+Part_0070 , 0 , 2.0 , 2.0
+Part_0071 , 0 , 1.0 , 1.0
+Part_0072 , 0 , 2.0 , 2.0
+Part_0073 , 0 , 17.0 , 17.0
+Part_0074 , 0 , 4.0 , 4.0
+Retail_0001 , 4.0 , 1.0 , 5.0
+Retail_0002 , 4.0 , 1.0 , 5.0

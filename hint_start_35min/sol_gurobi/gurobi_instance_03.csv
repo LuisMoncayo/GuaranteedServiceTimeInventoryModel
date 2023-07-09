@@ -1,0 +1,70 @@
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (mac64[rosetta2])
+Thread count: 10 physical cores, 10 logical processors, using up to 10 threads
+Optimize a model with 56 rows, 63 columns and 115 nonzeros
+Model fingerprint: 0xc9259fb2
+Model has 17 general constraints
+Variable types: 34 continuous, 29 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+04, 2e+05]
+  Bounds range     [3e+01, 8e+01]
+  RHS range        [1e+00, 5e+01]
+
+User MIP start produced solution with objective 3.17818e+06 (0.00s)
+Loaded user MIP start with objective 3.17818e+06
+
+Presolve added 21 rows and 2712 columns
+Presolve time: 0.01s
+Presolved: 77 rows, 2775 columns, 8235 nonzeros
+Presolved model has 17 SOS constraint(s)
+Found heuristic solution: objective 3178158.6117
+Variable types: 2742 continuous, 33 integer (0 binary)
+
+Root relaxation: objective 2.243609e+06, 77 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 2243608.99    0    8 3178158.61 2243608.99  29.4%     -    0s
+     0     0 2459228.84    0    8 3178158.61 2459228.84  22.6%     -    0s
+H    0     0                    3051333.4985 2459228.84  19.4%     -    0s
+     0     2 2459228.84    0    8 3051333.50 2459228.84  19.4%     -    0s
+H   37    43                    2965742.2481 2459228.84  17.1%   2.7    0s
+H   38    43                    2962531.5367 2459228.84  17.0%   2.7    0s
+H   41    43                    2928040.4293 2459228.84  16.0%   2.9    0s
+* 1043   522              51    2830248.6795 2459228.84  13.1%   2.0    0s
+* 1086   522              52    2784961.6981 2459228.84  11.7%   2.0    0s
+H 8966   791                    2775017.4610 2645721.37  4.66%   1.8    1s
+* 9382   753              58    2760031.7015 2645721.37  4.14%   1.8    2s
+
+Explored 11926 nodes (26766 simplex iterations) in 2.47 seconds (2.63 work units)
+Thread count was 10 (of 10 available processors)
+
+Solution count 10: 2.76003e+06 2.77502e+06 2.78496e+06 ... 3.17818e+06
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (3.7082e-05) exceeds tolerance
+Warning: max general constraint violation (3.7082e-05) exceeds tolerance
+Best objective 2.760031701505e+06, best bound 2.760031701505e+06, gap 0.0000%
+
+User-callback calls 24579, time in user-callback 0.04 sec
+ ----------------------------------------
+Time to run:, 2.4781692028045654 ,seconds
+The value of the objective using Gurobi is, 2760031.70 
+Manuf_0001 , 19.0 , 12.0 , 31.0
+Trans_0001 , 31.0 , 2.0 , 33.0
+Manuf_0002 , 26.0 , 10.0 , 36.0
+Trans_0004 , 36.0 , 2.0 , 38.0
+Manuf_0003 , 33.0 , 10.0 , 43.0
+Dist_0002 , 43.0 , 1.2 , 0.0
+Manuf_0004 , 38.0 , 10.0 , 0.0
+Dist_0003 , 0.0 , 4.3 , 0.0
+Dist_0004 , 0.0 , 4.2 , 0.0
+Part_0001 , 0 , 45.0 , 19.0
+Part_0002 , 0 , 37.5 , 19.0
+Part_0003 , 0 , 53.5 , 19.0
+Part_0004 , 0 , 26.0 , 26.0
+Part_0005 , 0 , 31.0 , 31.0
+Trans_0002 , 31.0 , 2.0 , 33.0
+Trans_0003 , 31.0 , 2.0 , 33.0
+Dist_0001 , 38.0 , 1.0 , 0.0
