@@ -1,0 +1,9 @@
+Stage , Degree , In_Edges , Out_Edges , Depth
+Manuf_0001 , 5 , 3 , 2 , 1
+Retail_0001 , 1 , 1 , 0 , 0
+Retail_0002 , 2 , 2 , 0 , 0
+Manuf_0002 , 5 , 3 , 2 , 1
+Retail_0003 , 1 , 1 , 0 , 0
+Part_0001 , 2 , 0 , 2 , 2
+Part_0002 , 2 , 0 , 2 , 2
+Part_0003 , 2 , 0 , 2 , 2
