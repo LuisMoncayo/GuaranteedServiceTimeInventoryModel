@@ -1,0 +1,452 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 1500px;
+                 height: 1500px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 1500px;
+                 height: 1500px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#ffd166", "id": "Manuf_0001", "label": "Manuf_0001", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0002", "label": "Manuf_0002", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0003", "label": "Manuf_0003", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0004", "label": "Manuf_0004", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0005", "label": "Manuf_0005", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0006", "label": "Manuf_0006", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0007", "label": "Manuf_0007", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0008", "label": "Manuf_0008", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0009", "label": "Manuf_0009", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0010", "label": "Manuf_0010", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0011", "label": "Manuf_0011", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0012", "label": "Manuf_0012", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0013", "label": "Manuf_0013", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0014", "label": "Manuf_0014", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0015", "label": "Manuf_0015", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0016", "label": "Manuf_0016", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0017", "label": "Manuf_0017", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0018", "label": "Manuf_0018", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0019", "label": "Manuf_0019", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0020", "label": "Manuf_0020", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0021", "label": "Manuf_0021", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0022", "label": "Manuf_0022", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0023", "label": "Manuf_0023", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0024", "label": "Manuf_0024", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0025", "label": "Manuf_0025", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0026", "label": "Manuf_0026", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0027", "label": "Manuf_0027", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0028", "label": "Manuf_0028", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0029", "label": "Manuf_0029", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0030", "label": "Manuf_0030", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0031", "label": "Manuf_0031", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0032", "label": "Manuf_0032", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0033", "label": "Manuf_0033", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0034", "label": "Manuf_0034", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0035", "label": "Manuf_0035", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0036", "label": "Manuf_0036", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0037", "label": "Manuf_0037", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0038", "label": "Manuf_0038", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0039", "label": "Manuf_0039", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0040", "label": "Manuf_0040", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0041", "label": "Manuf_0041", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0042", "label": "Manuf_0042", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0043", "label": "Manuf_0043", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0044", "label": "Manuf_0044", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0045", "label": "Manuf_0045", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0046", "label": "Manuf_0046", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0047", "label": "Manuf_0047", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0048", "label": "Manuf_0048", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0049", "label": "Manuf_0049", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0050", "label": "Manuf_0050", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0051", "label": "Manuf_0051", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0052", "label": "Manuf_0052", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0053", "label": "Manuf_0053", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0054", "label": "Manuf_0054", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0055", "label": "Manuf_0055", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0056", "label": "Manuf_0056", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0057", "label": "Manuf_0057", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0058", "label": "Manuf_0058", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0059", "label": "Manuf_0059", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0060", "label": "Manuf_0060", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0061", "label": "Manuf_0061", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0062", "label": "Manuf_0062", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0063", "label": "Manuf_0063", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0064", "label": "Manuf_0064", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0065", "label": "Manuf_0065", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0066", "label": "Manuf_0066", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0067", "label": "Manuf_0067", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0068", "label": "Manuf_0068", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0069", "label": "Manuf_0069", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0070", "label": "Manuf_0070", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0071", "label": "Manuf_0071", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0072", "label": "Manuf_0072", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0073", "label": "Manuf_0073", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0074", "label": "Manuf_0074", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0075", "label": "Manuf_0075", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0076", "label": "Manuf_0076", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0077", "label": "Manuf_0077", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0078", "label": "Manuf_0078", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0079", "label": "Manuf_0079", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0080", "label": "Manuf_0080", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0081", "label": "Manuf_0081", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0082", "label": "Manuf_0082", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0083", "label": "Manuf_0083", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0084", "label": "Manuf_0084", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0085", "label": "Manuf_0085", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0086", "label": "Manuf_0086", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0087", "label": "Manuf_0087", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0088", "label": "Manuf_0088", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0089", "label": "Manuf_0089", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0090", "label": "Manuf_0090", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0091", "label": "Manuf_0091", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0092", "label": "Manuf_0092", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0093", "label": "Manuf_0093", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0094", "label": "Manuf_0094", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0095", "label": "Manuf_0095", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0096", "label": "Manuf_0096", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0097", "label": "Manuf_0097", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0098", "label": "Manuf_0098", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0099", "label": "Manuf_0099", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0100", "label": "Manuf_0100", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0101", "label": "Manuf_0101", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0102", "label": "Manuf_0102", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0103", "label": "Manuf_0103", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0104", "label": "Manuf_0104", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0105", "label": "Manuf_0105", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0106", "label": "Manuf_0106", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0107", "label": "Manuf_0107", "shape": "dot", "size": 20}, {"color": "#ffd166", "id": "Manuf_0108", "label": "Manuf_0108", "shape": "dot", "size": 20}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "Manuf_0001", "to": "Manuf_0099"}, {"arrows": "to", "from": "Manuf_0001", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0001", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0001", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0001", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0001", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0002", "to": "Manuf_0099"}, {"arrows": "to", "from": "Manuf_0002", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0002", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0002", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0002", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0002", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0002", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0003", "to": "Manuf_0099"}, {"arrows": "to", "from": "Manuf_0003", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0003", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0004", "to": "Manuf_0099"}, {"arrows": "to", "from": "Manuf_0004", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0004", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0004", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0004", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0004", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0004", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0005", "to": "Manuf_0099"}, {"arrows": "to", "from": "Manuf_0005", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0005", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0005", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0005", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0005", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0005", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0006", "to": "Manuf_0099"}, {"arrows": "to", "from": "Manuf_0006", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0006", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0006", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0006", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0006", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0006", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0007", "to": "Manuf_0100"}, {"arrows": "to", "from": "Manuf_0007", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0007", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0007", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0007", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0007", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0007", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0007", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0008", "to": "Manuf_0100"}, {"arrows": "to", "from": "Manuf_0008", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0008", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0008", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0008", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0008", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0008", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0008", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0009", "to": "Manuf_0100"}, {"arrows": "to", "from": "Manuf_0009", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0009", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0009", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0009", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0009", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0009", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0010", "to": "Manuf_0100"}, {"arrows": "to", "from": "Manuf_0010", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0010", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0010", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0010", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0010", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0010", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0011", "to": "Manuf_0100"}, {"arrows": "to", "from": "Manuf_0011", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0011", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0011", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0011", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0011", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0011", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0011", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0012", "to": "Manuf_0100"}, {"arrows": "to", "from": "Manuf_0012", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0012", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0012", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0012", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0012", "to": "Manuf_0105"}, {"arrows": "to", "from": "Manuf_0012", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0012", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0012", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0013", "to": "Manuf_0100"}, {"arrows": "to", "from": "Manuf_0013", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0013", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0013", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0013", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0013", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0013", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0013", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0014", "to": "Manuf_0100"}, {"arrows": "to", "from": "Manuf_0014", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0014", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0014", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0014", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0014", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0014", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0014", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0015", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0015", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0015", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0015", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0015", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0015", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0016", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0016", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0016", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0017", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0017", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0017", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0018", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0018", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0018", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0018", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0019", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0019", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0019", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0019", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0019", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0020", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0020", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0020", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0020", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0021", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0021", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0021", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0021", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0021", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0022", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0022", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0022", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0022", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0022", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0022", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0023", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0023", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0023", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0023", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0023", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0024", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0024", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0024", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0024", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0024", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0025", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0025", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0025", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0025", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0025", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0026", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0026", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0026", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0026", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0027", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0027", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0027", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0027", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0027", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0028", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0028", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0028", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0028", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0028", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0029", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0029", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0029", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0029", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0029", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0029", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0030", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0030", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0030", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0030", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0030", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0031", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0031", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0031", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0031", "to": "Manuf_0105"}, {"arrows": "to", "from": "Manuf_0031", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0031", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0031", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0032", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0032", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0033", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0033", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0033", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0033", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0034", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0034", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0034", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0034", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0035", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0035", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0035", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0036", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0036", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0036", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0036", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0036", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0036", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0037", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0037", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0037", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0037", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0037", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0038", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0039", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0039", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0040", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0040", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0041", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0041", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0041", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0041", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0041", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0041", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0042", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0042", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0042", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0042", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0042", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0042", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0043", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0043", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0043", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0043", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0043", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0044", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0044", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0044", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0044", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0044", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0044", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0045", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0045", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0045", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0045", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0045", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0045", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0046", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0046", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0046", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0046", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0046", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0046", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0046", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0047", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0047", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0047", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0047", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0047", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0047", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0047", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0048", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0048", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0048", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0048", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0048", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0048", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0049", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0049", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0049", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0049", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0049", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0049", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0050", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0050", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0050", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0050", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0050", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0050", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0051", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0051", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0051", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0051", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0051", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0052", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0052", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0052", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0052", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0052", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0052", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0052", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0053", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0053", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0053", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0053", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0053", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0053", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0053", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0054", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0054", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0054", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0054", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0054", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0054", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0055", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0055", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0055", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0055", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0055", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0056", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0056", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0056", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0056", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0056", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0056", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0057", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0057", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0057", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0057", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0057", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0057", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0057", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0058", "to": "Manuf_0101"}, {"arrows": "to", "from": "Manuf_0058", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0058", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0058", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0058", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0058", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0059", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0059", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0059", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0059", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0059", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0060", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0060", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0060", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0061", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0061", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0061", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0061", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0062", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0062", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0062", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0063", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0063", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0063", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0064", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0064", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0064", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0064", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0065", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0065", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0066", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0066", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0066", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0066", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0067", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0067", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0067", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0067", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0068", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0068", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0068", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0068", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0068", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0069", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0069", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0069", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0069", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0069", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0070", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0070", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0070", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0070", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0071", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0071", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0071", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0072", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0072", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0073", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0073", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0073", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0073", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0073", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0074", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0074", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0074", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0074", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0074", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0075", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0075", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0075", "to": "Manuf_0104"}, {"arrows": "to", "from": "Manuf_0075", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0075", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0076", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0076", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0076", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0076", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0077", "to": "Manuf_0102"}, {"arrows": "to", "from": "Manuf_0077", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0077", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0077", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0077", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0078", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0078", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0078", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0078", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0079", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0079", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0080", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0080", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0080", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0081", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0081", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0082", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0082", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0082", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0083", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0083", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0084", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0084", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0084", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0085", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0085", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0085", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0086", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0086", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0086", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0087", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0087", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0088", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0088", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0089", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0089", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0089", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0090", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0090", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0090", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0090", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0091", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0092", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0093", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0093", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0094", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0094", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0094", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0094", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0095", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0095", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0095", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0096", "to": "Manuf_0103"}, {"arrows": "to", "from": "Manuf_0096", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0096", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0096", "to": "Manuf_0108"}, {"arrows": "to", "from": "Manuf_0097", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0097", "to": "Manuf_0107"}, {"arrows": "to", "from": "Manuf_0098", "to": "Manuf_0106"}, {"arrows": "to", "from": "Manuf_0098", "to": "Manuf_0107"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "repulsion": {
+            "centralGravity": 0.2,
+            "damping": 0.09,
+            "nodeDistance": 100,
+            "springConstant": 0.05,
+            "springLength": 200
+        },
+        "solver": "repulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
