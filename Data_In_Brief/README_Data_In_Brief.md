@@ -10,3 +10,11 @@ list_instances = ['01','02','03','04','05','06','07','08','09','10',
 ```
 The service level $\alpha$ and the guaranteed service time $\Phi$ are set based on the data from the file **file_name = "MSOM-06-038-R2 Data Set in Excel.xls"**. The reader has to set the holding cost $I$ that by default is 20%/year.
 
+In line 266 of the file **main.py**, the user must set the time $T$ in which the algorithm must stop if the Gurobi B&C Algorithm does not find a better solution. In the below figure, the time is set to 10 minutes (or 60*10 second).
+
+```{python}
+        # Terminate if objective has not improved in 20s
+        if time.time() - model._time > 60*10:
+            model.terminate()
+```
+
