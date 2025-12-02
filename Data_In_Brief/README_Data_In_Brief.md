@@ -1,3 +1,5 @@
-# Get the results in Table 1.
+# Compute the Safety Stock Cost in Table 1.
+
+
 
 
