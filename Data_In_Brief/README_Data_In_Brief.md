@@ -1,3 +1,3 @@
-# Get the resuolts in Table 1.
+# Get the results in Table 1.
 
 
