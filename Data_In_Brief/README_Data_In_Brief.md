@@ -1,5 +1,7 @@
 # Compute the Safety Stock Cost in Table 1.
 
+The first step is to select the supply chain instance to analyse. In this example, we evaluate all 38 supply chains simultaneously.
+
 ```{python}
 list_instances = ['01','02','03','04','05','06','07','08','09','10',
                   '11','12','13','14','15','16','17','18','19','20',
