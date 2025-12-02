@@ -1,4 +1,4 @@
-# Compute the Safety Stock Cost in Table 1.
+# Compute the Safety Stock Cost in Table 1
 
 In the file **main.py**, teh user must select the supply chain instance to analyse. In this example, we evaluate all 38 supply chains simultaneously.
 
