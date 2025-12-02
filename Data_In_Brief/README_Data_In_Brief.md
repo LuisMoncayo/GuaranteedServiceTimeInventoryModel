@@ -13,8 +13,8 @@ The service level $\alpha$ and the guaranteed service time $\Phi$ are set based 
 In line 266 of the file **main.py**, the user must set the time $T$ in which the algorithm must stop if the Gurobi B&C Algorithm does not find a better solution. In the below figure, the time is set to 10 minutes (or 60*10 second).
 
 ```{python}
-        # Terminate if objective has not improved in 20s
-        if time.time() - model._time > 60*10:
-            model.terminate()
+# Terminate if objective has not improved in 20s
+if time.time() - model._time > 60*10:
+  model.terminate()
 ```
 
