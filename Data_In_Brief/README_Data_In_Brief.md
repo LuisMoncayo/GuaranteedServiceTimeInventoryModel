@@ -20,5 +20,11 @@ In line 266 of **main.py**, the user defines the time limit $T$ after which the 
 if time.time() - model._time > 60*10:
   model.terminate()
 ```
+# Generate the Edge and Depth Tables and Figures
 
-The data about the degree and edges showing in Table 1 and Figure 1 nad 2 
+The data about the degree and edges showing in Table 1 and Figure 1 and 2 are computed the file **grpah_analysis.py**. The file models the supply chain as a digraph such as
+
+```{python}
+G = nx.from_pandas_edgelist(edges_data, create_using=nx.DiGraph() )
+```
+The edges_data is a pandas object with the $(i,j)\in E$.
