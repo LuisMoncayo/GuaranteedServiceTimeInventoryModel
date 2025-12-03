@@ -21,3 +21,4 @@ if time.time() - model._time > 60*10:
   model.terminate()
 ```
 
+The data about the degree and edges showing in Table 1 and Figure 1 nad 2 
