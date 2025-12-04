@@ -1,4 +1,4 @@
-# Compute the Safety Stock Cost in Table 1
+# Compute the Safety Stock Cost in Table 2
 
 In the file **main.py**, the user selects which supply chain instances to analyse. In this example, all 38 instances are evaluated simultaneously.
 
@@ -20,9 +20,9 @@ In line 266 of **main.py**, the user defines the time limit $T$ after which the 
 if time.time() - model._time > 60*10:
   model.terminate()
 ```
-# Generate the Edge and Depth Tables and Figures
+# Generate the Edge and Depth Table 1 and 3, and Figure 2 and 3. 
 
-The data about the degree and edges showing in Table 1 and Figure 1 and 2 are computed the file **grpah_analysis.py**. The file models the supply chain as a digraph such as
+The data about the degree and edges showing in Table 1 and 3, and Figure 2 and 3 are computed the file **grpah_analysis.py**. The file models the supply chain as a digraph such as
 
 ```{python}
 G = nx.from_pandas_edgelist(edges_data, create_using=nx.DiGraph() )
