@@ -1,4 +1,4 @@
-# Compute the Safety Stock Cost in Table 2
+# Compute the safety stock cost in Table 2
 
 In the file **main.py**, the user selects which supply chain instances to analyse. In this example, all 38 instances are evaluated simultaneously.
 
@@ -20,7 +20,7 @@ In line 266 of **main.py**, the user defines the time limit $T$ after which the 
 if time.time() - model._time > 60*10:
   model.terminate()
 ```
-# Generate the Edge and Depth Table 1 and 3, and Figure 2 and 3 
+# Generate the edge and depth Table 1 and 3, and Figure 2 and 3 
 
 The data about the degree and edges showing in Table 1 and 3, and Figure 2 and 3 are computed the file **grpah_analysis.py**. The file models the supply chain as a digraph such as
 
@@ -45,3 +45,44 @@ To graph the plots with cateforical variables the **pyvis** package is used for 
 from pyvis.network import Network
 import networkx as nx
 ```
+Therefore, for each supply chain the graph is created using by:
+
+```{python}
+nt = Network('1500px', '1500px', notebook=True, cdn_resources="remote", directed =True)
+    nt.repulsion()
+    # populates the nodes and edges data structures
+    for node in nodes_data["Stage Name"]:
+        if 'Dist' in node:
+            nt.add_node(node, color='#ef476f', size=20)
+        elif 'Manuf' in node:
+            nt.add_node(node, color='#ffd166',size=20)
+        elif 'Part' in node:
+            nt.add_node(node, color='#06d6a0',size=20)
+        elif 'Retail' in node:
+            nt.add_node(node, color='#118ab2',size=20)
+        else:
+            nt.add_node(node, color='#073b4c',size=20)#Trans
+
+    list_edges = zip(edges_data['source'],edges_data['target'])
+    nt.add_edges(list_edges)
+    nt.toggle_physics(True)
+    nt.save_graph('html_SC_structure/instance'+instace+".html")
+    
+    nt = Network('1500px', '1500px', notebook=True, cdn_resources="remote", directed =True)
+    #nt.repulsion()
+    # populates the nodes and edges data structures
+    for i in range(len(nodes_data.index)):
+        if 'Dist' in nodes_data.iloc[i,0]:
+            nt.add_node(nodes_data.iloc[i,0],color='#ef476f',size=20,x=int(nodes_data.iloc[i,22]),y=int(nodes_data.iloc[i,23]))
+        elif 'Manuf' in nodes_data.iloc[i,0]:
+            nt.add_node(nodes_data.iloc[i,0],color='#ffd166',size=20,x=int(nodes_data.iloc[i,22]),y=int(nodes_data.iloc[i,23]))
+        elif 'Part' in nodes_data.iloc[i,0]:
+            nt.add_node(nodes_data.iloc[i,0],color='#06d6a0',size=20,x=int(nodes_data.iloc[i,22]),y=int(nodes_data.iloc[i,23]))
+        elif 'Retail' in nodes_data.iloc[i,0]:
+            nt.add_node(nodes_data.iloc[i,0],color='#118ab2',size=20,x=int(nodes_data.iloc[i,22]),y=int(nodes_data.iloc[i,23]))
+        else:
+            nt.add_node(nodes_data.iloc[i,0],color='#073b4c',size=20,x=int(nodes_data.iloc[i,22]),y=int(nodes_
+```
+
+
+
